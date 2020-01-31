@@ -3,7 +3,7 @@ from time import sleep
 from secret import username, password
 
 
-class Tinder_Bot():
+class TinderBot():
 
     def __init__(self):
         self.driver = webdriver.Chrome(executable_path='/home/flyboypk/Documents/chromedriver')
@@ -20,15 +20,19 @@ class Tinder_Bot():
         self.driver.switch_to_window(self.driver.window_handles[1])
         sleep(3)
 
+        # Input Username
         email_in = self.driver.find_element_by_xpath('//*[@id="email"]')
         email_in.send_keys(username)
 
+        # Input password
         pw_in = self.driver.find_element_by_xpath('//*[@id="pass"]')
         pw_in.send_keys(password)
 
+        # Login Button
         login_btn = self.driver.find_element_by_xpath('//*[@id="u_0_0"]')
         login_btn.click()
 
+        # Switch window to first window
         self.driver.switch_to_window(base_window)
 
         sleep(2)
@@ -53,28 +57,39 @@ class Tinder_Bot():
 
     def auto_swipe(self):
         while True:
-            sleep(0.5)
-            try:
-                self.like()
-            except Exception:
-                try:
-                    self.close_popup()
-                except Exception:
-                    self.close_popup_NoThanks()
+            self.like()
 
+    # def auto_swipe(self):
+    #     while True:
+    #         sleep(0.5)
+    #         try:
+    #             self.like()
+    #         except Exception:
+    #             try:
+    #                 self.close_popup()
+    #             except Exception:
+    #                 self.close_popup_NoThanks()
 
     def close_popup(self):
         popup3 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
         popup3.click()
 
+    # Continue matching after 1 match
     def close_match(self):
         match_popup = self.driver.find_element_by_xpath('')
         match_popup.click()
 
+    # Close Tinder Gold Popup
+    def close_tinderGold(self):
+        gold = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[2]/button[2]')
+        gold.click()
+
+    # Close Add to desktop popup
     def close_popup_NoThanks(self):
         popup4 = self.driver.find_element_by_xpath('//*[@id="modal-manager"]/div/div/div[3]/button[2]')
         popup4.click()
 
 
+# Function calling
 bot = TinderBot()
-bot.login()
+bot.login_by_facebook()
