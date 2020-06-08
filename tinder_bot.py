@@ -59,6 +59,7 @@ class TinderBot():
         while True:
             self.like()
 
+            
     # def auto_swipe(self):
     #     while True:
     #         sleep(0.5)
